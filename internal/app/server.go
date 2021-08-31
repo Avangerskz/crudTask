@@ -18,7 +18,7 @@ func StartHTTPServer(ctx context.Context, cfg *configs.Configs, errCh chan error
 
 	//router := mux.NewRouter()
 
-	db, dbErr := sql.Open("postgres", "postgresql://postgres:qwe@localhost:5433/cruddb?sslmode=disable")
+	db, dbErr := sql.Open("postgres", cfg.DbUrl)
 	if dbErr != nil{
 		log.Fatal(dbErr)
 	}
@@ -36,7 +36,6 @@ func StartHTTPServer(ctx context.Context, cfg *configs.Configs, errCh chan error
 
 	err := http.ListenAndServe(cfg.Port, muxServe)
 	if err != nil{
-
 		log.Fatal("listen and serve error")
 	}
 }
