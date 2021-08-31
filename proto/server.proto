@@ -97,7 +97,7 @@ service CRUDService{
   };
   rpc UpdateUserByUUID(UpdateUserByUUIDReq) returns (UpdateUserByUUIDRes){
     option (google.api.http) = {
-      put:"/users/{uuid}";
+      put:"/users";
       body:"*";
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {

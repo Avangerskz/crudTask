@@ -60,6 +60,49 @@
         "tags": [
           "User"
         ]
+      },
+      "put": {
+        "summary": "Update user",
+        "operationId": "UpdateUserByUUID",
+        "responses": {
+          "200": {
+            "description": "User updated",
+            "schema": {
+              "$ref": "#/definitions/protoUpdateUserByUUIDRes"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": ".proto.ErrorNotFound"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": ".proto.Error"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoUpdateUserByUUIDReq"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
       }
     },
     "/users/{uuid}": {
@@ -98,55 +141,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          }
-        ],
-        "tags": [
-          "User"
-        ]
-      },
-      "put": {
-        "summary": "Update user",
-        "operationId": "UpdateUserByUUID",
-        "responses": {
-          "200": {
-            "description": "User updated",
-            "schema": {
-              "$ref": "#/definitions/protoUpdateUserByUUIDRes"
-            }
-          },
-          "404": {
-            "description": "User not found",
-            "schema": {
-              "$ref": ".proto.ErrorNotFound"
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": ".proto.Error"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/protoUpdateUserByUUIDReq"
-            }
           }
         ],
         "tags": [

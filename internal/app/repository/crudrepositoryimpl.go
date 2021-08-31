@@ -39,16 +39,28 @@ func (c CRUDRepositoryImpl) GetUserByUUID(ctx context.Context, req *pb.GetUserBy
 
 	res := &pb.GetUserByUUIDRes{}
 
-	err = tx.QueryRowContext(
+	//var id int
+	//rows, err := tx.QueryContext(
+	//	ctx,
+	//	"select * from users where id = $1",
+	//	req.Uuid,
+	//	)
+	row := tx.QueryRowContext(
 		ctx,
 		"select * from users where id = $1",
 		req.Uuid,
-	).Scan(res.Uuid, res.FirstName, res.LastName, res.Email, res.Age, res.CreatedDate)
+	)
 
-	if err != nil{
+	if row.Err() != nil{
 		tx.Rollback()
-		return nil, errors.InternalServerError("internalserver", err.Error())
+		return nil, errors.InternalServerError("internalserver", row.Err().Error())
 	}
+	scanErr := row.Scan(&res.Uuid, &res.FirstName, &res.LastName, &res.Email, &res.Age, &res.CreatedDate)
+	if scanErr != nil{
+		tx.Rollback()
+		return nil, errors.NotFound("notfound", scanErr.Error())
+	}
+
 	if res.FirstName == ""{
 		tx.Rollback()
 		return nil, errors.BadRequest("badrequest", "user not found")

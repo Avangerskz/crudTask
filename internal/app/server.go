@@ -18,7 +18,7 @@ func StartHTTPServer(ctx context.Context, cfg *configs.Configs, errCh chan error
 
 	//router := mux.NewRouter()
 
-	db, dbErr := sql.Open("postgres", "postgres://dim:123@localhost:5432/cruddb?sslmode=disable")
+	db, dbErr := sql.Open("postgres", "postgresql://postgres:qwe@localhost:5433/cruddb?sslmode=disable")
 	if dbErr != nil{
 		log.Fatal(dbErr)
 	}
