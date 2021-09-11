@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"github.com/micro/go-micro/v2/errors"
 	"taskRestAPI/internal/app/repository"
 	pb "taskRestAPI/proto"
 )
@@ -13,6 +14,9 @@ type CRUDServiceImpl struct {
 
 
 func (C CRUDServiceImpl) CreateUser(ctx context.Context, req *pb.CreateUserReq) (*pb.CreateUserRes, error) {
+	if req.FirstName == ""{
+		return nil, errors.BadRequest("bad request", "fields are empty")
+	}
 	err := C.repo.CreateUser(ctx, req)
 	if err != nil{
 		return nil, err

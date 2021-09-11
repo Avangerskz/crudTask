@@ -3,6 +3,8 @@ module taskRestAPI
 go 1.16
 
 require (
+	github.com/AndreasBriese/bbloom v0.0.0-20180913140656-343706a395b7 // indirect
+	github.com/dgraph-io/badger/v2 v2.2007.4 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.5.0
 	github.com/lib/pq v1.10.2
 	github.com/micro/go-micro/v2 v2.9.1
