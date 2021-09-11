@@ -41,11 +41,11 @@ func TestCRUDServiceImpl_GetUserByUUID(t *testing.T) {
 func TestCRUDServiceImpl_UpdateUserByUUID(t *testing.T) {
 	repoMock := setupRepo()
 
-	repoMock.On("UpdateUserByUUID", mock.Anything, mock.Anything).Return(nil)
+	repoMock.On("UpdateUserByUUID", mock.Anything, mock.Anything).Return(nil, nil)
 
 	srv := NewCRUDService(repoMock)
 	res, err := srv.UpdateUserByUUID(context.Background(), &pb.UpdateUserByUUIDReq{})
-	assert.NotNil(t, err)
-	assert.Nil(t, res)
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
 	repoMock.AssertExpectations(t)
 }
