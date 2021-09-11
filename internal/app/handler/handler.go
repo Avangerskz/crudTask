@@ -6,6 +6,7 @@ import (
 	pb "taskRestAPI/proto"
 )
 
+//api handler structure, it serves api requests and send to services
 type CRUDHandler struct{
 	pb.UnimplementedCRUDServiceServer
 	service service.CRUDService
@@ -15,6 +16,7 @@ func (C CRUDHandler) mustEmbedUnimplementedCRUDServiceServer() {
 	panic("implement me")
 }
 
+//constructor creates new instance of CRUDHandler using CRUDService object
 func NewCRUDHandler(service service.CRUDService) *CRUDHandler {
 	return &CRUDHandler{service: service}
 }

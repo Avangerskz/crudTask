@@ -7,10 +7,17 @@ import (
 	pb "taskRestAPI/proto"
 )
 
+//CRUDRepositoryImpl implements the CRUDRepository interface
 type CRUDRepositoryImpl struct {
 	db *sql.DB
 }
 
+//NewCRUDRepository creates  new instance of CRUDRepository API using sql.db
+func NewCRUDRepository(db *sql.DB) CRUDRepository {
+	return &CRUDRepositoryImpl{db: db}
+}
+
+//CreateUser function creates new user in database with fields username, lastname, age, email
 func (c CRUDRepositoryImpl) CreateUser(ctx context.Context, req *pb.CreateUserReq)  error {
 	tx, err := c.db.Begin()
 	if err != nil{
@@ -28,9 +35,9 @@ func (c CRUDRepositoryImpl) CreateUser(ctx context.Context, req *pb.CreateUserRe
 	}
 	tx.Commit()
 	return nil
-
 }
 
+//GetUserByUUID takes id of user and returns user entity
 func (c CRUDRepositoryImpl) GetUserByUUID(ctx context.Context, req *pb.GetUserByUUIDReq) (*pb.GetUserByUUIDRes, error) {
 	tx, err := c.db.Begin()
 	if err != nil{
@@ -70,6 +77,7 @@ func (c CRUDRepositoryImpl) GetUserByUUID(ctx context.Context, req *pb.GetUserBy
 	return res, nil
 }
 
+//UpdateUserByUUID takes all fields of user entity and updates all columns in users table by user id
 func (c CRUDRepositoryImpl) UpdateUserByUUID(ctx context.Context, req *pb.UpdateUserByUUIDReq) error {
 	tx, err := c.db.Begin()
 	if err != nil{
@@ -89,6 +97,3 @@ func (c CRUDRepositoryImpl) UpdateUserByUUID(ctx context.Context, req *pb.Update
 	return nil
 }
 
-func NewCRUDRepository(db *sql.DB) CRUDRepository {
-	return &CRUDRepositoryImpl{db: db}
-}
