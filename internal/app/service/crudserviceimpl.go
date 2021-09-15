@@ -12,7 +12,7 @@ type CRUDServiceImpl struct {
 	repo repository.CRUDRepository
 }
 
-
+//this function creates new user entity with repository
 func (C CRUDServiceImpl) CreateUser(ctx context.Context, req *pb.CreateUserReq) (*pb.CreateUserRes, error) {
 	if req.FirstName == ""{
 		return nil, errors.BadRequest("bad request", "fields are empty")

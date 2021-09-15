@@ -46,12 +46,6 @@ func (c CRUDRepositoryImpl) GetUserByUUID(ctx context.Context, req *pb.GetUserBy
 
 	res := &pb.GetUserByUUIDRes{}
 
-	//var id int
-	//rows, err := tx.QueryContext(
-	//	ctx,
-	//	"select * from users where id = $1",
-	//	req.Uuid,
-	//	)
 	row := tx.QueryRowContext(
 		ctx,
 		"select * from users where id = $1",

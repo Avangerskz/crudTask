@@ -47,5 +47,4 @@ func StartHTTPServer(ctx context.Context, cfg *configs.Configs, errCh chan error
 	if err != nil{
 		log.Fatal("listen and serve error")
 	}
-
 }
