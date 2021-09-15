@@ -13,6 +13,7 @@ func setupRepo() *mocks.CRUDRepository {
 	return new(mocks.CRUDRepository)
 }
 
+
 func TestCRUDServiceImpl_CreateUser(t *testing.T) {
 	serviceMock := setupRepo()
 
